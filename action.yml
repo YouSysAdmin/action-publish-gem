@@ -1,0 +1,21 @@
+name: Publish gem
+description: Build and publish a Ruby gem
+author: dawidd6
+branding:
+  icon: upload-cloud
+  color: red
+inputs:
+  api_key:
+    description: Rubygems.org API key
+    required: false
+  github_token:
+    description: GitHub Packages token
+    required: false
+runs:
+  using: composite
+  steps:
+    - run: ruby -W0 $GITHUB_ACTION_PATH/main.rb
+      shell: sh
+      env:
+        API_KEY: ${{inputs.api_key}}
+        GITHUB_TOKEN: ${{inputs.github_token}}
